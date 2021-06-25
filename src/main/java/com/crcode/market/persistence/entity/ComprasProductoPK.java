@@ -6,10 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable // Por que esta luego la pondremos en ComprasProducto
-public class ComprasProductoPK implements Serializable{
+public class ComprasProductoPK implements Serializable {
 	@Column(name = "id_compra")
 	private Integer idCompra;
-	
+
 	@Column(name = "id_producto")
 	private Integer idProducto;
 

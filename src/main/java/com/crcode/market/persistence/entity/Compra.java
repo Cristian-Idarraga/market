@@ -44,6 +44,7 @@ public class Compra {
 	@OneToMany(mappedBy = "producto")
 	private List<ComprasProducto> productos;
 
+	
 	public Integer getIdCompra() {
 		return idCompra;
 	}

@@ -34,6 +34,7 @@ public class Cliente {
 	@OneToMany(mappedBy = "cliente") // el nombre de la variable donde lo mappeamos en compra
 	private List<Compra> compras;
 
+	
 	public String getIdCliente() {
 		return idCliente;
 	}
