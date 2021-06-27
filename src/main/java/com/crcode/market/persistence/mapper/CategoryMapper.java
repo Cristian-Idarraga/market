@@ -9,15 +9,14 @@ import com.crcode.market.persistence.entity.Categoria;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
-	@Mappings({
-		@Mapping(source = "idCategoria", target = "categoryId"),
-		@Mapping(source = "descripcion", target = "category"),
-		@Mapping(source = "estado", target = "active")
-	})
-	Category toCategory(Categoria categoria);
-	
-	@InheritInverseConfiguration //Indica que es la inversa a la de arriba
-	@Mapping(target = "productos", ignore = true) //Le decimos que que ignore ese atributo
-	Categoria toCategoria(Category category);
+    @Mappings({
+            @Mapping(source = "idCategoria", target = "categoryId"),
+            @Mapping(source = "descripcion", target = "category"),
+            @Mapping(source = "estado", target = "active"),
+    })
+    Category toCategory(Categoria categoria);
 
+    @InheritInverseConfiguration
+    @Mapping(target = "productos", ignore = true)
+    Categoria toCategoria(Category category);
 }
