@@ -12,89 +12,92 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "productos")
 public class Producto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producto")
+    private Integer idProducto;
 
-	@Id // Porque es la llave primaria
-	@GeneratedValue(strategy = GenerationType.IDENTITY)	//Genera un numero unico
-	@Column(name = "id_producto")
-	private Integer idProducto;
+    private String nombre;
 
-	@Column(name = "nombre")
-	private String nombre;
+    @Column(name = "id_categoria")
+    private Integer idCategoria;
 
-	@Column(name = "id_categoria")
-	private Integer idCategoria;
+    @Column(name = "codigo_barras")
+    private String codigoBarras;
 
-	@Column(name = "codigo_barras")
-	private String codigoBarras;
+    @Column(name = "precio_venta")
+    private Double precioVenta;
 
-	@Column(name = "precio_venta")
-	private Double precioVenta;
+    @Column(name = "cantidad_stock")
+    private Integer cantidadStock;
 
-	@Column(name = "cantidad_stock")
-	private Integer cantidadStock;
+    private Boolean estado;
 
-	@Column(name = "estado")
-	private Boolean estado;
-	
-	@ManyToOne
-	@JoinColumn(name = "id_categoria", insertable = false, updatable = false)
-	private Categoria categoria;
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    private Categoria categoria;
 
-	//Podemos crear las compras, para saber que productos se ven involucrados en ciertas compras
-	
-	public Integer getIdProducto() {
-		return idProducto;
-	}
+    public Integer getIdProducto() {
+        return idProducto;
+    }
 
-	public void setIdProducto(Integer idProducto) {
-		this.idProducto = idProducto;
-	}
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public Integer getIdCategoria() {
-		return idCategoria;
-	}
+    public Integer getIdCategoria() {
+        return idCategoria;
+    }
 
-	public void setIdCategoria(Integer idCategoria) {
-		this.idCategoria = idCategoria;
-	}
+    public void setIdCategoria(Integer idCategoria) {
+        this.idCategoria = idCategoria;
+    }
 
-	public String getCodigoBarras() {
-		return codigoBarras;
-	}
+    public String getCodigoBarras() {
+        return codigoBarras;
+    }
 
-	public void setCodigoBarras(String codigoBarras) {
-		this.codigoBarras = codigoBarras;
-	}
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
+    }
 
-	public Double getPrecioVenta() {
-		return precioVenta;
-	}
+    public Double getPrecioVenta() {
+        return precioVenta;
+    }
 
-	public void setPrecioVenta(Double precioVenta) {
-		this.precioVenta = precioVenta;
-	}
+    public void setPrecioVenta(Double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
 
-	public Integer getCantidadStock() {
-		return cantidadStock;
-	}
+    public Integer getCantidadStock() {
+        return cantidadStock;
+    }
 
-	public void setCantidadStock(Integer cantidadStock) {
-		this.cantidadStock = cantidadStock;
-	}
+    public void setCantidadStock(Integer cantidadStock) {
+        this.cantidadStock = cantidadStock;
+    }
 
-	public Boolean getEstado() {
-		return estado;
-	}
+    public Boolean getEstado() {
+        return estado;
+    }
 
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 }
