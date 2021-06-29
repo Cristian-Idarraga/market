@@ -3,8 +3,10 @@ package com.crcode.market.persistence.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,79 +19,90 @@ import javax.persistence.Table;
 @Table(name = "compras")
 public class Compra {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_compra")
-	private Integer idCompra;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_compra")
+    private Integer idCompra;
 
-	@Column(name = "id_cliente")
-	private Integer idCliente;
+    @Column(name = "id_cliente")
+    private String idCliente;
 
-	@Column(name = "fecha")
-	private LocalDateTime fecha;
+    private LocalDateTime fecha;
 
-	@Column(name = "medio_pago")
-	private Character medioPago;
+    @Column(name = "medio_pago")
+    private String medioPago;
 
-	@Column(name = "comentario")
-	private String comentario;
+    private String comentario;
+    private String estado;
 
-	@Column(name = "estado")
-	private Character estado;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
+    private Cliente cliente;
 
-	@ManyToOne // Desde esta tabla se ve muchos a uno, el'id_cliente', es el nombre de la comuna que hace como foreigns
-	@JoinColumn(name = "id_cliente", insertable = false, updatable = false) // Para que no permita crear nuevos clientes en esta relacion
-	private Cliente cliente;
-	
-	@OneToMany(mappedBy = "producto")
-	private List<ComprasProducto> productos;
+    @OneToMany(mappedBy = "compra", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    private List<ComprasProducto> productos;
 
-	
-	public Integer getIdCompra() {
-		return idCompra;
-	}
+    public Integer getIdCompra() {
+        return idCompra;
+    }
 
-	public void setIdCompra(Integer idCompra) {
-		this.idCompra = idCompra;
-	}
+    public void setIdCompra(Integer idCompra) {
+        this.idCompra = idCompra;
+    }
 
-	public Integer getIdCliente() {
-		return idCliente;
-	}
+    public String getIdCliente() {
+        return idCliente;
+    }
 
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
-	}
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
+    }
 
-	public LocalDateTime getFecha() {
-		return fecha;
-	}
+    public LocalDateTime getFecha() {
+        return fecha;
+    }
 
-	public void setFecha(LocalDateTime fecha) {
-		this.fecha = fecha;
-	}
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
 
-	public Character getMedioPago() {
-		return medioPago;
-	}
+    public String getMedioPago() {
+        return medioPago;
+    }
 
-	public void setMedioPago(Character medioPago) {
-		this.medioPago = medioPago;
-	}
+    public void setMedioPago(String medioPago) {
+        this.medioPago = medioPago;
+    }
 
-	public String getComentario() {
-		return comentario;
-	}
+    public String getComentario() {
+        return comentario;
+    }
 
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
 
-	public Character getEstado() {
-		return estado;
-	}
+    public String getEstado() {
+        return estado;
+    }
 
-	public void setEstado(Character estado) {
-		this.estado = estado;
-	}
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ComprasProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ComprasProducto> productos) {
+        this.productos = productos;
+    }
 }

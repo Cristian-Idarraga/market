@@ -28,7 +28,15 @@ public class ProductService {
     public Product save(Product product) {
         return productRepository.save(product);
     }
-
+    
+    public Product update(Product product) throws Exception {
+    	Optional<Product> productFind = this.getProduct(product.getProductId());
+    	if(productFind.isPresent()) {
+    		return this.productRepository.save(product);
+    	}
+    	throw new Exception("No encontrado");
+    }
+    
     public boolean delete(int productId) {
         return getProduct(productId).map(product -> {
             productRepository.delete(productId);
@@ -41,4 +49,5 @@ public class ProductService {
 //			return false;
 //		}
 	}
+
 }
