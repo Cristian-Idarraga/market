@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.crcode.market.domain.Product;
 import com.crcode.market.domain.service.ProductService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -23,12 +27,19 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/all")
+	@ApiOperation("Get all supermarket products")
+	@ApiResponse(code = 200, message = "OK")
 	public ResponseEntity<List<Product>> getAll() {
 		return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
 	}
 
 	@GetMapping("/{productId}")
-	public ResponseEntity<Product> getProduct(@PathVariable("productId") int productId) {
+	@ApiOperation("Search a product with an ID")
+	@ApiResponses({	//Estos Api-- son de diseño, podemos añadir en los parametro el @ApiParam(value = "message, exame = "7"")
+		@ApiResponse(code = 200, message = "OK"),
+		@ApiResponse(code = 404, message = "Product not found")
+	})
+	public ResponseEntity<Product> getProduct( @PathVariable("productId") int productId) {
 		return productService.getProduct(productId).map(product -> new ResponseEntity<>(product, HttpStatus.OK))
 				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}
